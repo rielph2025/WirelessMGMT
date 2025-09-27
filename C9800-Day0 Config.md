@@ -1,9 +1,9 @@
 
-<!---   Your Monitor Number = #$34T#   --->  
+<!---   Your Monitor Number = 82   --->  
 
 
 > IP Addresses:  
-> C9800-CL = 10.#$34T#.1.7
+> C9800-CL = 10.82.1.7
 
 <br>
 <br>
@@ -19,7 +19,7 @@
 ~~~
 !@CSwitch
 conf t
- hostname CoreBABA-#$34T#
+ hostname CoreBABA-82
  enable secret pass
  service password-encryption
  no logging console
@@ -51,10 +51,10 @@ conf t
   name VOIPVLAN
   exit
  int vlan 1
-  ip add 10.#$34T#.1.4 255.255.255.0
+  ip add 10.82.1.4 255.255.255.0
   no shut
  int vlan 10
-  ip add 10.#$34T#.10.4 255.255.255.0
+  ip add 10.82.10.4 255.255.255.0
   no shut
  !
  !
@@ -74,19 +74,19 @@ conf t
  ip routing
  !
  !
- ip dhcp excluded-address 10.#$34T#.1.1 10.#$34T#.1.100
- ip dhcp excluded-address 10.#$34T#.10.1 10.#$34T#.10.100
+ ip dhcp excluded-address 10.82.1.1 10.82.1.100
+ ip dhcp excluded-address 10.82.10.1 10.82.10.100
  ip dhcp pool POOLDATA
-  network 10.#$34T#.1.0 255.255.255.0
-  default-router 10.#$34T#.1.4
-  dns-server 10.#$34T#.1.10
+  network 10.82.1.0 255.255.255.0
+  default-router 10.82.1.4
+  dns-server 10.82.1.10
   domain-name MGMTDATA.COM
  ip dhcp pool POOLWIFI
-  network 10.#$34T#.10.0 255.255.255.0
-  default-router 10.#$34T#.10.4
-  dns-server 10.#$34T#.1.10
+  network 10.82.10.0 255.255.255.0
+  default-router 10.82.10.4
+  dns-server 10.82.1.10
   domain-name WIFIDATA.COM 
-  option 43 ip 10.#$34T#.1.7
+  option 43 ip 10.82.1.7
   end
 ~~~
 
@@ -134,7 +134,7 @@ conf t
 | Network Adapter | Connection              | Network           |
 | ---             | ---                     | ---               |
 | Network Adapter | __NAT__                 | 208.8.8.0 /24     |
-| NetAdapter 2    | __Bridged (Replicate)__ | 10.#$34T#.1.0 /24 |
+| NetAdapter 2    | __Bridged (Replicate)__ | 10.82.1.0 /24 |
 | NetAdapter 3    | __VMNet3__              | 192.168.103.0 /24 |
 
 <br>
@@ -176,7 +176,7 @@ conf t
   name WIFIVLAN
   exit
  int vlan 1
-  ip add 10.#$34T#.1.7 255.255.255.0
+  ip add 10.82.1.7 255.255.255.0
   no shut
  int g1
   no switchport
@@ -190,8 +190,8 @@ conf t
  !
  !
  ip route 0.0.0.0 0.0.0.0 208.8.8.2
- ip route 10.0.0.0 255.0.0.0 10.#$34T#.1.4
- ip route 200.0.0.0 255.255.255.0 10.#$34T#.1.4
+ ip route 10.0.0.0 255.0.0.0 10.82.1.4
+ ip route 200.0.0.0 255.255.255.0 10.82.1.4
  !
  !
  ntp server 216.239.35.12
@@ -250,7 +250,7 @@ Set the __Wireless Management VLAN__ to __1__
 
 <br>
 
-The __Wireless Management IP__ is __10.#$34T#.1.7__
+The __Wireless Management IP__ is __10.82.1.7__
 and the Subnet Mask as __255.255.255.0__
 
 Then __Next__
@@ -334,7 +334,7 @@ wireless config vwlc-ssc key-size 2048 signature-algo sha256 password 0 C1sc0123
 ---
 &nbsp;
 
-## Exercise 01: Troubleshoot `Wireless-#$34T#` wifi so that it becomes operable in the network.
+## Exercise 01: Troubleshoot `Wireless-82` wifi so that it becomes operable in the network.
 
 ### 1. Go to `Configuration` > Under Wireless Setup, select `Advanced`
 ![wlan02](img/wlan02.JPG)
@@ -399,7 +399,7 @@ wireless config vwlc-ssc key-size 2048 signature-algo sha256 password 0 C1sc0123
 ---
 &nbsp;
 
-### 10. Assign the DHCP server for the WLAN, `10.#$34T#.10.4`, finally `Apply to Device`.
+### 10. Assign the DHCP server for the WLAN, `10.82.10.4`, finally `Apply to Device`.
 ![wlan11](img/wlan11.JPG)
 
 &nbsp;
@@ -420,7 +420,7 @@ wireless config vwlc-ssc key-size 2048 signature-algo sha256 password 0 C1sc0123
 ---
 &nbsp;
 
-### 13. Set the Name and Description to `AP-WLANs`. Then, under WLAN-POLICY Maps, `Add` a mapping and set the WLAN Profile to `Wireless-#$34T#` with a Policy Profile `Wireless-POL`. Then, `Apply to Device`.
+### 13. Set the Name and Description to `AP-WLANs`. Then, under WLAN-POLICY Maps, `Add` a mapping and set the WLAN Profile to `Wireless-82` with a Policy Profile `Wireless-POL`. Then, `Apply to Device`.
 ![wlan14](img/wlan14.JPG)
 
 &nbsp;
@@ -511,7 +511,7 @@ wireless config vwlc-ssc key-size 2048 signature-algo sha256 password 0 C1sc0123
 
 
 ### Exercise 02: Create WLANs for `SOC-TEAM` on VLAN 11. Verify by connecting on mobile and checking if you got the correct IP from the DHCP Server.
-NETWORK ADDRESS: 10.#$34T#.11.0/24
+NETWORK ADDRESS: 10.82.11.0/24
 
 ~~~
 !@CoreBABA
@@ -521,16 +521,16 @@ conf t
   exit
  int vlan 11
   description SOC-TEAM-GW
-  ip add 10.#$34T#.11.4 255.255.255.0
+  ip add 10.82.11.4 255.255.255.0
   ip ospf 1 area 0
   no shut
  !
- ip dhcp excluded-address 10.#$34T#.11.1 10.#$34T#.11.100
+ ip dhcp excluded-address 10.82.11.1 10.82.11.100
  ip dhcp pool SOCPOOL
-  network 10.#$34T#.11.0 255.255.255.0
-  default-router 10.#$34T#.11.4 255.255.255.0
+  network 10.82.11.0 255.255.255.0
+  default-router 10.82.11.4 255.255.255.0
   domain-name SOC-TEAM.COM
-  dns-server 10.#$34T#.1.10
+  dns-server 10.82.1.10
   end
 ~~~
 
@@ -540,7 +540,7 @@ conf t
 ---
 &nbsp;
 
-### Exercise 03: Create WLANs for `THREAT-HUNTERS` on VLAN 12. Using the network address 10.#$34T#.12.0/24
+### Exercise 03: Create WLANs for `THREAT-HUNTERS` on VLAN 12. Using the network address 10.82.12.0/24
 
 ~~~
 !@CoreBABA
@@ -550,16 +550,16 @@ conf t
   exit
  int vlan 12
   description THREAT-HUNTERS-GW
-  ip add 10.#$34T#.12.4 255.255.255.0
+  ip add 10.82.12.4 255.255.255.0
   ip ospf 1 area 0
   no shut
  !
- ip dhcp excluded-address 10.#$34T#.12.1 10.#$34T#.12.100
+ ip dhcp excluded-address 10.82.12.1 10.82.12.100
  ip dhcp pool THUNTPOOL
-  network 10.#$34T#.12.0 255.255.255.0
-  default-router 10.#$34T#.12.4 255.255.255.0
+  network 10.82.12.0 255.255.255.0
+  default-router 10.82.12.4 255.255.255.0
   domain-name THUNT.COM
-  dns-server 10.#$34T#.1.10
+  dns-server 10.82.1.10
   end
 ~~~
 
@@ -573,7 +573,7 @@ conf t
 Prerequisites  
 - Windows Server 2022 VM  
   - Static IP addressing  
-    - IP: 10.#$34T#.1.8  
+    - IP: 10.82.1.8  
 	- Mask: 255.255.255.0  
 	- Gateway: None  
 	- DNS: 127.0.0.1  
